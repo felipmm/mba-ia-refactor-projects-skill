@@ -1,0 +1,29 @@
+{
+  "permissions": {
+    "allow": [
+      "Bash(pip install *)",
+      "Bash(python app.py)",
+      "Bash(curl -s http://localhost:5000/)",
+      "Bash(python3 -m json.tool)",
+      "Bash(curl -s http://localhost:5000/produtos)",
+      "Bash(curl -s http://localhost:5000/health)",
+      "Bash(python3 app.py)",
+      "Bash(echo \"EXIT: $?\")",
+      "Bash(python3 -c \"import flask; print\\(flask.__version__\\)\")",
+      "Read(//opt/homebrew/bin/**)",
+      "Read(//Users/felipe.merchiori/.venv/**)",
+      "Bash(pip3 install *)",
+      "Bash(python3 -c \"import flask; print\\('Flask', flask.__version__\\)\")",
+      "Bash(curl -s -X POST http://localhost:5000/login -H 'Content-Type: application/json' -d '{\"email\":\"admin@loja.com\",\"senha\":\"admin123\"}')",
+      "Bash(curl -s -X POST http://localhost:5000/login -H 'Content-Type: application/json' -d '{\"email\":\"admin@loja.com\",\"senha\":\"errada\"}')",
+      "Bash(curl -s -X POST http://localhost:5000/login -H 'Content-Type: text/plain' -d invalido)",
+      "Bash(curl -s http://localhost:5000/usuarios)",
+      "Bash(curl -s -X POST http://localhost:5000/pedidos -H 'Content-Type: application/json' -d '{\"usuario_id\":2,\"itens\":[{\"produto_id\":1,\"quantidade\":1},{\"produto_id\":2,\"quantidade\":2}]}')",
+      "Bash(curl -s http://localhost:5000/pedidos)",
+      "Bash(curl -s http://localhost:5000/relatorios/vendas)",
+      "Bash(curl -s -X POST http://localhost:5000/admin/reset-db)",
+      "Bash(curl -s -X POST http://localhost:5000/admin/query -H 'Content-Type: application/json' -d '{\"sql\":\"SELECT * FROM usuarios\"}')",
+      "Bash(pkill -f \"python3 app.py\")"
+    ]
+  }
+}

@@ -1,6 +1,7 @@
 from database import db
 from datetime import datetime
 import hashlib
+import secrets
 
 class User(db.Model):
     __tablename__ = 'users'
@@ -18,21 +19,21 @@ class User(db.Model):
             'id': self.id,
             'name': self.name,
             'email': self.email,
-            'password': self.password,
             'role': self.role,
             'active': self.active,
             'created_at': str(self.created_at)
         }
 
     def set_password(self, pwd):
-
-        self.password = hashlib.md5(pwd.encode()).hexdigest()
+        salt = secrets.token_hex(16)
+        digest = hashlib.sha256((salt + pwd).encode()).hexdigest()
+        self.password = f"{salt}:{digest}"
 
     def check_password(self, pwd):
-        return self.password == hashlib.md5(pwd.encode()).hexdigest()
+        if ':' not in self.password:
+            return False
+        salt, digest = self.password.split(':', 1)
+        return hashlib.sha256((salt + pwd).encode()).hexdigest() == digest
 
     def is_admin(self):
-        if self.role == 'admin':
-            return True
-        else:
-            return False
+        return self.role == 'admin'

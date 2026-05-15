@@ -1,10 +1,5 @@
 from datetime import datetime
 import re
-import os
-import json
-import sys
-import math
-import hashlib
 
 def format_date(date_obj):
     if date_obj:
@@ -43,10 +38,10 @@ def log_action(action, details=None):
 def parse_date(date_string):
     try:
         return datetime.strptime(date_string, '%Y-%m-%d')
-    except:
+    except (ValueError, TypeError):
         try:
             return datetime.strptime(date_string, '%d/%m/%Y')
-        except:
+        except (ValueError, TypeError):
             return None
 
 def is_valid_color(color):
@@ -100,7 +95,7 @@ def process_task_data(data, existing_task=None):
 
     if 'tags' in data:
         tags = data['tags']
-        if type(tags) == list:
+        if isinstance(tags, list):
             result['tags'] = ','.join(tags)
         else:
             result['tags'] = tags
